@@ -1,4 +1,4 @@
-import Quiz from "../../client/src/components/Quiz";
+import Quiz from "../../client/src/components/quiz";
 
 describe("Quiz component",
     () => {
@@ -19,6 +19,13 @@ describe("Quiz component",
             cy.get('button').contains('Start Quiz').click();
             cy.get('.card').should('be.visible');
             cy.get('h2').should('not.be.empty')
+        });
+
+        it ("should answer questions and complete the quiz", () => {
+            cy.mount(<Quiz />);
+            cy.get('button').contains("Start Quiz").click();
+            cy.get('button').contains("1").click();
+            cy.get('.alert-success').should("be.visible").and("contain","You score")
         });
     }
 );
